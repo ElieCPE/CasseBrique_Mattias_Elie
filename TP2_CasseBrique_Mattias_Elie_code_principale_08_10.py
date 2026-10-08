@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Oct  8 09:59:08 2026
+Objectif : creer un jeu de casse brique avec programme objet
 
-@author: User
+Auteur : Elie et Mattias
+
+Date : 08/10/2026
+
+ToDo : 
 """
 
