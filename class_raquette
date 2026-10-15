@@ -5,7 +5,7 @@ Auteurs : Mattias et Elie
 
 Date: 15/10/2026
 
-ToDo : rien pour l'instant
+ToDo : Amelioration de la raquette et ajouter des options de jeux (ex: au bout de 5 rauqette brisees agrandire la raquette)
 
 """
 
@@ -18,8 +18,7 @@ class Raquette:
     (x, y) est la position du centre de la raquette
     """
 
-    def __init__(self, x, y, canvas, largeur=110, hauteur=14,
-                 couleur='deepskyblue'):
+    def __init__(self, x, y, canvas, largeur=110, hauteur=14, couleur='deepskyblue'):
         """
         Crée la raquette et la dessine sur le canevas
         Entrées : x, y : position du centre de la raquette
@@ -34,8 +33,7 @@ class Raquette:
         self.hauteur = hauteur
         self.couleur = couleur
         self.vitesse = vitesse_raquette
-        self.id = canvas.create_rectangle(self.coordonnees(),
-                                          fill=couleur, outline='')
+        self.id = canvas.create_rectangle(self.coordonnees(), fill = couleur, outline = '')
 
     def coordonnees(self):
         """
@@ -44,8 +42,7 @@ class Raquette:
         """
         demi_largeur = self.largeur / 2
         demi_hauteur = self.hauteur / 2
-        return (self.x - demi_largeur, self.y - demi_hauteur,
-                self.x + demi_largeur, self.y + demi_hauteur)
+        return (self.x - demi_largeur, self.y - demi_hauteur, self.x + demi_largeur, self.y + demi_hauteur)
 
     def deplacer(self, direction, largeur_canvas):
         """
