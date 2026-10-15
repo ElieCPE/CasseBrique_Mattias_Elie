@@ -5,7 +5,7 @@
 #Infos : taille de la fenêtre ( 700*700+400+200)
 
 import tkinter as tk
-import math 
+import math as math
 
 #Classe 1: Brique classique. Concept: rectangle immobile, disparaissant lorsqu'elle entre en contact avec la balle une fois.  
 
@@ -39,13 +39,13 @@ class briqueclassique:
 #          et a un effet sur elles qui diffère selon le type de la brique.
 
 class balle:
-    def __init__(self, x, y, caneva, vitesse, rayon=10, couleur = "red"):
-            self.__x = x
-            self.__y = y
-            self.__rayon = rayon
-            self.__couleur = couleur
-            self.__canva = caneva
-            self.__vitesse = 
+    def __init__(self, x, y, caneva, rayon=10, couleur = "red"):
+        self.__x = x
+        self.__y = y
+        self.__rayon = rayon
+        self.__couleur = couleur
+        self.__canva = caneva
+
 
     def disque(self, caneva): #crée le visuel de la balle
         Balle = caneva.create_oval(self.__x - self.__rayon, self.__y - self.__rayon, self.__x + self.__rayon, self.__y + self.__rayon, width = 1, fill = self.__couleur)
@@ -65,3 +65,17 @@ class balle:
         
         
         if self.__y + self.__rayon + DY > self.caneva.
+
+
+
+
+
+
+class raquette:
+    def __init__(self, x, caneva, largeur=10, longueur = 40, couleur = "red"):
+
+        self.__x = x
+        self.__largeur = largeur
+        self.__longueur = longueur
+        self.__couleur = couleur
+        self.__caneva = caneva
