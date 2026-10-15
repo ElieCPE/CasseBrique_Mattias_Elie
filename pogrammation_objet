@@ -54,3 +54,14 @@ class balle:
         angle = math.random.uniform(0.2 * math.pi)
         DX = self.vitesse*math.cos(angle)
         DY = self.vitesse*math.sin(angle)
+
+        if self.__x + self.__rayon + DX > self.__caneva.largeur:
+            self.__x = 2*(self.__caneva.largeur - self.__rayon) - self.__x
+            DX = - DX
+
+        if self.__x - self.__rayon + DX < 0 :
+            self.__x = 2 * self.__rayon - self.__x
+            DX = -DX
+        
+        
+        if self.__y + self.__rayon + DY > self.caneva.
