@@ -22,3 +22,13 @@ class Raquette:
             x + largeur / 2, y + hauteur / 2,
             fill = couleur, outline= ""
         )
+    def deplacer(self, direction, largeur_canvas):
+        """direction vaut -1 (gauche), 0 (immobile) ou 1 (droite)."""
+        self.x += direction * self.vitesse
+        demi = self.largeur / 2
+        self.x = max(demi, min(largeur_canvas - demi, self.x))
+        self.canvas.coords(
+            self.id,
+            self.x - demi, self.y - self.hauteur / 2,
+            self.x + demi, self.y + self.hauteur / 2
+        )
