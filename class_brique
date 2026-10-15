@@ -1,5 +1,5 @@
 """
-Objectif : Creer la raquette
+Objectif : Creer les briques
 
 Auteur: Mattias et Elie
 
@@ -44,7 +44,7 @@ class Brique:
             self.canvas.delete(self.id)
             return self.points
 
-        # Une brique résistante change de couleur après un impact.
+# Une brique résistante change de couleur après un impact.
         self.canvas.itemconfigure(self.id, fill="gold")
         return 0
 
@@ -53,9 +53,3 @@ class Brique:
 #verifie si la balle touche la brique
     def contient(self, x, y, rayon):
         return (x + rayon >= self.x1 and x - rayon <= self.x2 and y + rayon >= self.y1 and y - rayon <= self.y2)
-
-
-
-    brique1 = Brique(20, 40, 90, 60, canvas, points=10, resistance=1, couleur="green")
-
-    brique2 = Brique(100, 40, 170, 60, canvas, points=30, resistance=2, couleur="blue")
