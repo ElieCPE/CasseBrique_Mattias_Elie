@@ -1,1 +1,18 @@
+"""
+Objectif : Creer la classe de la raquette
+Auteur: Mattias et Elie
+Date: 15/10/2026
 
+ToDo:
+
+"""
+
+
+class Raquette:
+    def __init__(self, x, y, canvas, largeur=110, hauteur=14, couleur="deepskyblue"):
+        self.x = x
+        self.y = y
+        self.canvas = canvas
+        self.largeur = largeur
+        self.hauteur = hauteur
+        self.couleur = couleur
