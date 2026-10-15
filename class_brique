@@ -1,7 +1,29 @@
+"""
+Objectif : Creer la raquette
+
+Auteur: Mattias et Elie
+
+Date: 15/10/2026
+
+ToDo:
+class brique implementant les fonctions :
+si la brique est touchée
+si la brique est detruite
+
+
+
+
+
+
+
+
+
+"""
+
 class Brique:
-    """Une brique qui peut nécessiter plusieurs impacts avant de disparaître."""
 
-    def __init__(self, x1, y1, x2, y2, canvas, points=10, resistance=1, couleur="seagreen"):
+    def __init__(self, x1, y1, x2, y2, canvas, points=10,
+                 resistance=1, couleur="seagreen"):
         self.canvas = canvas
         self.x1, self.y1, self.x2, self.y2 = x1, y1, x2, y2
         self.points = points
@@ -11,31 +33,8 @@ class Brique:
         self.id = canvas.create_rectangle(x1, y1, x2, y2, fill=couleur, outline="#17202a", width=2)
 
 
+#Renvoie les points gagnés lors de l'impact.
     def touche(self):
-        """Renvoie les points gagnés lors de l'impact."""
-        if self.detruite:
-            return 0
-
-        self.resistance -= 1
-        if self.resistance <= 0:
-            self.detruite = True
-            self.canvas.delete(self.id)
-            return self.points
-
-        # Une brique résistante chanclass Brique:
-    """Une brique qui peut nécessiter plusieurs impacts avant de disparaître."""
-
-    def __init__(self, x1, y1, x2, y2, canvas, points=10, resistance=1, couleur="seagreen"):
-        self.canvas = canvas
-        self.x1, self.y1, self.x2, self.y2 = x1, y1, x2, y2
-        self.points = points
-        self.resistance = resistance
-        self.couleur = couleur
-        self.detruite = False
-        self.id = canvas.create_rectangle(x1, y1, x2, y2, fill=couleur, outline="#17202a", width=2)
-
-    def touche(self):
-        """Renvoie les points gagnés lors de l'impact."""
         if self.detruite:
             return 0
 
@@ -49,40 +48,14 @@ class Brique:
         self.canvas.itemconfigure(self.id, fill="gold")
         return 0
 
+
+
+#verifie si la balle touche la brique
     def contient(self, x, y, rayon):
-        """Test simple de recouvrement entre la balle et la brique."""
         return (x + rayon >= self.x1 and x - rayon <= self.x2 and y + rayon >= self.y1 and y - rayon <= self.y2)
 
 
-class BriqueClassique(Brique):
-    def __init__(self, x1, y1, x2, y2, canvas):
-        super().__init__(
-            x1, y1, x2, y2, canvas,
-            points=10, resistance=1, couleur="mediumseagreen"
-        )
 
+    brique1 = Brique(20, 40, 90, 60, canvas, points=10, resistance=1, couleur="green")
 
-class BriqueSolide(Brique):
-    def __init__(self, x1, y1, x2, y2, canvas):
-        super().__init__(
-            x1, y1, x2, y2, canvas,
-            points=30, resistance=2, couleur="royalblue"
-        )
-ge de couleur après un impact.
-        self.canvas.itemconfigure(self.id, fill="gold")
-        return 0
-
-
-    def contient(self, x, y, rayon):
-        """Test simple de recouvrement entre la balle et la brique."""
-        return (x + rayon >= self.x1 and x - rayon <= self.x2 and y + rayon >= self.y1 and y - rayon <= self.y2)
-
-
-class BriqueClassique(Brique):
-    def __init__(self, x1, y1, x2, y2, canvas):
-        super().__init__(x1, y1, x2, y2, canvas, points=10, resistance=1, couleur="mediumseagreen")
-
-
-class BriqueSolide(Brique):
-    def __init__(self, x1, y1, x2, y2, canvas):
-        super().__init__(x1, y1, x2, y2, canvas, points=30, resistance=2, couleur="royalblue")
+    brique2 = Brique(100, 40, 170, 60, canvas, points=30, resistance=2, couleur="blue")
