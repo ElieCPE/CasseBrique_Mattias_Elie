@@ -17,8 +17,8 @@ from class_brique import Brique
 
 
 largeur = 800
-hauteur = 600
-fps_ms = 16
+hauteur = 550
+fps_ms = 20
 
 # Touches qui font bouger la raquette (regroupées ici pour ne pas
 # répéter la même liste dans appuyer_touche et relacher_touche).

@@ -19,7 +19,7 @@ facteur_vitesse_y = 0.76
 class Balle:
     """Balle qui se déplace toute seule et rebondit sur les éléments du jeu."""
 
-    def __init__(self, x, y, canvas, rayon=9, couleur="red", vitesse=5):
+    def __init__(self, x, y, canvas, rayon=9, couleur="red", vitesse=10):
         """
         Crée la balle 
         Entrées : x, y (float) : centre de départ de la balle
