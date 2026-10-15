@@ -1,6 +1,8 @@
 """
-Objectif : Creer la classe de la raquette
+Objectif : Creer la raquette
+
 Auteur: Mattias et Elie
+
 Date: 15/10/2026
 
 ToDo:
@@ -23,7 +25,9 @@ class Raquette:
             fill = couleur, outline= ""
         )
     def deplacer(self, direction, largeur_canvas):
-        """direction vaut -1 (gauche), 0 (immobile) ou 1 (droite)."""
+
+        """direction vaut -1 (gauche), 0 (immobile) ou 1 (droite)"""
+
         self.x += direction * self.vitesse
         demi = self.largeur / 2
         self.x = max(demi, min(largeur_canvas - demi, self.x))
@@ -32,3 +36,9 @@ class Raquette:
             self.x - demi, self.y - self.hauteur / 2,
             self.x + demi, self.y + self.hauteur / 2
         )
+
+    def contient_x(self, x):
+        return self.x - self.largeur / 2 <= x <= self.x + self.largeur / 2
+
+    def supprimer(self):
+        self.canvas.delete(self.id)
