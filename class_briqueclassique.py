@@ -6,7 +6,7 @@ Auteur: Mattias et Elie
 Date: 15/10/2026
 
 ToDo:
-
+Creer des techniques plus avancees
 """
 
 from class_brique import Brique
