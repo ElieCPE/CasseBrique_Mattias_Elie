@@ -5,7 +5,7 @@ Auteurs : Mattias et Elie
 
 Date: 15/10/2026
 
-ToDo : Amelioration de la raquette et ajouter des options de jeux (ex: au bout de 5 rauqette brisees agrandire la raquette)
+ToDo : Amelioration de la raquette et ajouter des options de jeux (ex: au bout de 5 rauqette briques agrandire la raquette)
 
 """
 
