@@ -18,7 +18,7 @@ from class_brique import Brique
 
 largeur = 800
 hauteur = 550
-fps_ms = 20
+fps_ms = 15
 
                                                 
 touches_gauche = ("Left", "q", "Q", "a", "A")     # Touches qui font bouger la raquette (regroupées ici pour ne pas répéter la 
@@ -57,7 +57,7 @@ class JeuCasseBriques:
         self.label_vies = tk.Label(bandeau, text="Vies : 3", fg="white", bg="black", font=("Arial", 13, "bold"))
         self.label_vies.pack(side="right")
 
-        self.canvas = tk.Canvas(fenetre, width=largeur, height=hauteur, bg="black", highlightthickness=0)
+        self.canvas = tk.Canvas(fenetre, width=largeur, height=hauteur, bg="black")
         self.canvas.pack(padx=12)
 
         commandes = tk.Frame(fenetre, bg="black")
@@ -253,6 +253,8 @@ class JeuCasseBriques:
             if brique.contient(balle.x, balle.y, rayon):
                 self.score += brique.touche()
                 balle.rebondir_verticalement()
+
+                balle.accelerer()
                 self.actualiser_informations()
                 break
 
@@ -297,7 +299,7 @@ class JeuCasseBriques:
         texte = (message + "\nScore final: " + str(self.score)
                  + "\nClique sur Recommencer")
         self.message_id = self.canvas.create_text(largeur / 2, hauteur / 2, text=texte,
-            fill="white", font=("Arial", 22, "bold"), justify="center")
+            fill="white", justify="center")
 
     def recommencer(self):
         """Relance une partie depuis le début"""

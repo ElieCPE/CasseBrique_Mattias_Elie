@@ -30,7 +30,7 @@ class Raquette:
         self.couleur = couleur
         self.vitesse = vitesse
         self.id = canvas.create_rectangle(x - largeur / 2, y - hauteur / 2, x + largeur / 2, y + hauteur / 2,
-            fill=couleur, outline="")
+        fill=couleur, outline="")
 
     def deplacer(self, direction, largeur_canvas):
         """
