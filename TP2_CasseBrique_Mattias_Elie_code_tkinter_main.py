@@ -20,17 +20,17 @@ largeur = 800
 hauteur = 550
 fps_ms = 20
 
-# Touches qui font bouger la raquette (regroupées ici pour ne pas
-# répéter la même liste dans appuyer_touche et relacher_touche).
-touches_gauche = ("Left", "q", "Q", "a", "A")
-touches_droite = ("Right", "d", "D")
+                                                
+touches_gauche = ("Left", "q", "Q", "a", "A")     # Touches qui font bouger la raquette (regroupées ici pour ne pas répéter la 
+touches_droite = ("Right", "d", "D")              # même liste dans appuyer_touche et relacher_touche)
 
-# Vitesses de la balle (pixels par image), pour éviter les nombres
-# "magiques" dans la boucle de jeu.
-vitesse_horizontale_max = 5.5
-vitesse_horizontale_min = 1.2
+
+
+vitesse_horizontale_max = 5.5       # Vitesses de la balle (pixels par image), pour éviter les nombres
+vitesse_initiale_y = -4.0           # "magiques" dans la boucle de jeu
+vitesse_horizontale_min = 1.2       
 vitesse_initiale_x = 3.2
-vitesse_initiale_y = -4.0
+
 
 
 class JeuCasseBriques:
@@ -72,8 +72,8 @@ class JeuCasseBriques:
         tk.Label(commandes, text="Déplacement: flèches gauche/droite ou Q / D",
         fg="white", bg="black", font=("Arial", 10)).pack(side="right")
 
-        # Un booléen par touche : plus simple à suivre qu'un ensemble.
-        self.touche_gauche = False
+        
+        self.touche_gauche = False      # Un booléen par touche 
         self.touche_droite = False
 
         self.score = 0
