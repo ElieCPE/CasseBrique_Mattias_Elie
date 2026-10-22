@@ -31,7 +31,7 @@ class Brique:
         self.resistance = resistance
         self.couleur = couleur
         self.detruite = False
-        self.id = canvas.create_rectangle(x1, y1, x2, y2, fill=couleur, outline="black", width=2)
+        self.id = canvas.create_rectangle(x1, y1, x2, y2, fill=couleur, outline="white", width=1)
 
     def touche(self):
         """

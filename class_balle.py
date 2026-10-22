@@ -13,8 +13,8 @@ import random
 import math
 
 
-facteur_vitesse_x = 0.65
-facteur_vitesse_y = 0.76
+facteur_vitesse_x = 0.65 * (3/4)
+facteur_vitesse_y = 0.76 *(3/4)
 
 
 class Balle:
