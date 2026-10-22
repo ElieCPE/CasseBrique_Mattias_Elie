@@ -10,6 +10,7 @@ se deplacer selon l'axe des y
 """
 
 import random
+import math
 
 
 facteur_vitesse_x = 0.65
@@ -44,6 +45,20 @@ class Balle:
         self.x += self.dx
         self.y += self.dy
         self.canvas.move(self.id, self.dx, self.dy)
+
+    def accelerer(self, facteur=1.02, vitesse_max=11):
+        """Augmente la vitesse de la balle sans changer sa direction."""
+        
+        vitesse_actuelle = math.sqrt(self.dx **2 + self.dy **2)
+        nouvelle_vitesse = min(vitesse_actuelle * facteur, vitesse_max)
+
+        rapport = nouvelle_vitesse / vitesse_actuelle
+
+        self.dx *= rapport
+        self.dy *= rapport
+        self.vitesse = nouvelle_vitesse
+
+    
 
     def rebondir_horizontalement(self):
         """Inverse le sens horizontal de la balle (rebond sur un mur)"""

@@ -253,6 +253,8 @@ class JeuCasseBriques:
             if brique.contient(balle.x, balle.y, rayon):
                 self.score += brique.touche()
                 balle.rebondir_verticalement()
+
+                balle.accelerer()
                 self.actualiser_informations()
                 break
 
