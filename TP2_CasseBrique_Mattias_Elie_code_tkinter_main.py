@@ -297,7 +297,7 @@ class JeuCasseBriques:
         texte = (message + "\nScore final: " + str(self.score)
                  + "\nClique sur Recommencer")
         self.message_id = self.canvas.create_text(largeur / 2, hauteur / 2, text=texte,
-            fill="white", font=("Arial", 22, "bold"), justify="center")
+            fill="white", justify="center")
 
     def recommencer(self):
         """Relance une partie depuis le début"""
