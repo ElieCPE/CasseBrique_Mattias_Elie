@@ -57,7 +57,7 @@ class JeuCasseBriques:
         self.label_vies = tk.Label(bandeau, text="Vies : 3", fg="white", bg="black", font=("Arial", 13, "bold"))
         self.label_vies.pack(side="right")
 
-        self.canvas = tk.Canvas(fenetre, width=largeur, height=hauteur, bg="black", highlightthickness=0)
+        self.canvas = tk.Canvas(fenetre, width=largeur, height=hauteur, bg="black")
         self.canvas.pack(padx=12)
 
         commandes = tk.Frame(fenetre, bg="black")
