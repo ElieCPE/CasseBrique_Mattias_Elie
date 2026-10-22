@@ -10,6 +10,7 @@ ToDo : Amliorer le jeu en ajoutant des fonctionalites (accelertion de la balles 
 """
 
 import tkinter as tk
+import math
 
 from class_raquette import Raquette
 from class_balle import Balle
@@ -205,57 +206,78 @@ class JeuCasseBriques:
             direction += 1
         self.raquette.deplacer(direction, largeur)
 
-        self.balle.deplacer()
         balle = self.balle
         rayon = balle.rayon
 
-        # Murs gauche et droit
-        if balle.x - rayon <= 0:
-            balle.x = rayon
-            balle.rebondir_horizontalement()
-        elif balle.x + rayon >= largeur:
-            balle.x = largeur - rayon
-            balle.rebondir_horizontalement()
+        """ Découpage du déplacement en petits pas de 2 pixels maximum pour eviter le tunneling. Avant cette methode dès que la vitesse augmente
+        un peu trop la balle passait a travers les objets."""
+        
+        pas_max = 2
+        nombre_pas = max(1,math.ceil(max(abs(balle.dx), abs(balle.dy)) / pas_max))
 
-        # Plafond : pas de rebond sur le bas, car une vie est perdue
-        if balle.y - rayon <= 0:
-            balle.y = rayon
-            balle.rebondir_verticalement()
+        for _ in range(nombre_pas):
 
-        # Collision avec la raquette : seulement si la balle descend
-        if (balle.dy > 0
-                and balle.y + rayon >= self.raquette.haut()
-                and balle.y - rayon <= self.raquette.bas()
-                and self.raquette.contient_x(balle.x)):
-            balle.y = self.raquette.haut() - rayon
-            balle.rebondir_verticalement()
+            balle.deplacer(1 / nombre_pas)
 
-            # Plus on tape loin du centre, plus la balle repart sur le côté
-            ecart = (balle.x - self.raquette.x) / (self.raquette.largeur / 2)
-            nouvelle_vitesse = ecart * vitesse_horizontale_max
-            if nouvelle_vitesse > vitesse_horizontale_max:
-                nouvelle_vitesse = vitesse_horizontale_max
-            elif nouvelle_vitesse < -vitesse_horizontale_max:
-                nouvelle_vitesse = -vitesse_horizontale_max
-            balle.dx = nouvelle_vitesse
+            # Collision avec les murs gauche et droit
+            if balle.x - rayon <= 0:
+                balle.x = rayon
+                balle.rebondir_horizontalement()
 
-            # Évite une trajectoire presque verticale et trop lente
-            if -vitesse_horizontale_min < balle.dx < vitesse_horizontale_min:
-                if ecart >= 0:
-                    balle.dx = vitesse_horizontale_min
-                else:
-                    balle.dx = -vitesse_horizontale_min
+            elif balle.x + rayon >= largeur:
+                balle.x = largeur - rayon
+                balle.rebondir_horizontalement()
 
-        # Collision avec la première brique touchée pendant cette image
-        for brique in self.briques:
-            if brique.detruite:
-                continue
-            if brique.contient(balle.x, balle.y, rayon):
-                self.score += brique.touche()
+            # Collision avec le plafond
+            if balle.y - rayon <= 0:
+                balle.y = rayon
                 balle.rebondir_verticalement()
 
-                balle.accelerer()
-                self.actualiser_informations()
+            # Collision avec la raquette
+            if (balle.dy > 0 and balle.y + rayon >= self.raquette.haut() and balle.y - rayon <= self.raquette.bas() 
+                and self.raquette.contient_x(balle.x)):
+                balle.y = self.raquette.haut() - rayon
+
+                # On conserve la vitesse totale avant le rebond
+                vitesse = math.hypot(balle.dx, balle.dy)
+
+                ecart = ((balle.x - self.raquette.x)/ (self.raquette.largeur / 2))
+
+                # Direction horizontale selon le point d'impact
+                dx = ecart * vitesse_horizontale_max
+
+                # Limiter dx pour conserver une composante verticale
+                dx_max = min(vitesse_horizontale_max, vitesse * 0.9)
+                dx = max(-dx_max, min(dx_max, dx))
+
+                if abs(dx) < vitesse_horizontale_min:
+                    dx = (vitesse_horizontale_min
+                        if ecart >= 0
+                        else -vitesse_horizontale_min)
+
+                balle.dx = dx
+
+                # Recalculer dy pour conserver la vitesse totale
+                balle.dy = -math.sqrt(max(0, vitesse**2 - dx**2))
+
+            # Collision avec les briques
+            collision = False
+
+            for brique in self.briques:
+                if brique.detruite:
+                    continue
+
+                if brique.contient(balle.x, balle.y, rayon):
+                    self.score += brique.touche()
+                    balle.rebondir_verticalement()
+                    balle.accelerer()
+
+                    self.actualiser_informations()
+                    collision = True
+                    break
+
+            # On arrête les sous-pas dès qu'une brique est touchée
+            if collision:
                 break
 
         # La balle est passée sous la raquette : une vie en moins

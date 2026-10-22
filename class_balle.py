@@ -39,12 +39,15 @@ class Balle:
         self.dy = -vitesse * facteur_vitesse_y
         self.id = canvas.create_oval(x - rayon, y - rayon, x + rayon, y + rayon,fill=couleur, outline="")
 
-    def deplacer(self):
-        """Déplace la balle d'un pas selon sa vitesse actuelle (dx, dy)"""
-        
-        self.x += self.dx
-        self.y += self.dy
-        self.canvas.move(self.id, self.dx, self.dy)
+    
+    def deplacer(self, fraction=1):
+        """Déplace la balle d'une fraction de son déplacement habituel."""
+        dx = self.dx * fraction
+        dy = self.dy * fraction
+        self.x += dx
+        self.y += dy
+        self.canvas.move(self.id, dx, dy)
+
 
     def accelerer(self, facteur=1.02, vitesse_max=11):
         """Augmente la vitesse de la balle sans changer sa direction."""
@@ -79,8 +82,7 @@ class Balle:
         self.canvas.coords(
             self.id,
             x - self.rayon, y - self.rayon,
-            x + self.rayon, y + self.rayon
-        )
+            x + self.rayon, y + self.rayon)
 
     def supprimer(self):
         """Efface la balle du canevas"""
